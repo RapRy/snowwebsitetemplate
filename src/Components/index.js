@@ -1,0 +1,5 @@
+export { default as AboutAgency } from './AboutAgency/AboutAgency'
+export { default as AgencyContainer } from './AgencyContainer/AgencyContainer'
+export { default as BestProjects } from './BestProjects/BestProjects'
+export { default as HeroNav } from './HeroNav/HeroNav'
+export { default as PartnersConfessions } from './PartnersConfessions/PartnersConfessions'
