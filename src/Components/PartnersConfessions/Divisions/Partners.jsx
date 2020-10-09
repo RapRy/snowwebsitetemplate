@@ -2,27 +2,40 @@ import React from 'react'
 
 import styled from 'styled-components'
 
-import BgPattern from '../../../images/bg-pattern.jpg';
+import partner1 from '../../../images/partner-1.png';
+import partner2 from '../../../images/partner-2.png';
+import partner3 from '../../../images/partner-3.png';
+import partner4 from '../../../images/partner-4.png';
+import partner5 from '../../../images/partner-5.png';
 
 export default function Partners() {
-    const ConfessionsWrap = styled.div`
-        padding:40px 10px;
-        text-align:center;
-        background:url(${props => props.bg}) no-repeat top center;
+    const PartnersWrap = styled.div`
+        padding:10px 10px 20px;
+
+        ul{
+            display:grid;
+            grid-template-columns:repeat(6, 1fr);
+            grid-gap:5px;
+
+            li{
+                :nth-child(1){grid-column: 1/3;}
+                :nth-child(2){grid-column: 3/5;}
+                :nth-child(3){grid-column: 5/7;}
+                :nth-child(4){grid-column: 2/4;}
+                :nth-child(5){grid-column: 4/6;}
+            }
+        }
     `;
 
     return (
-        <ConfessionsWrap bg={BgPattern}>
-            <div className="confessionsSlider">
-                <div className="confessionSlide">
-                    <p>"Outstanding job and exceeded all expectations. It was a pleasure to work with them on a sizable first project and am looking forward to start the next one asap."</p>
-                    <span>MICHAEL HOPKINS</span>
-                </div>
-            </div>
-            <div className="confessionsSliderBullet">
-                <span className="activeBullet"></span>
-                <span></span>
-            </div>
-        </ConfessionsWrap>
+        <PartnersWrap>
+            <ul>
+                <li><img src={partner4} alt="partner4"/></li>
+                <li><img src={partner5} alt="partner5"/></li>
+                <li><img src={partner3} alt="partner3"/></li>
+                <li><img src={partner1} alt="partner1"/></li>
+                <li><img src={partner2} alt="partner2"/></li>
+            </ul>
+        </PartnersWrap>
     )
 }
