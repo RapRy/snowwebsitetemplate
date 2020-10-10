@@ -99,11 +99,7 @@ export default function Confessions() {
             </div>
             <div className="confessionsSliderBullet">
                 {
-                    confessions.map((bullet, i) => {
-                        return(
-                            <span key={i} className={`${(i === 0) ? "activeBullet" : ""}`}></span>
-                        )
-                    })
+                    confessions.map((bullet, i) => <span key={i} className={`${(i === 0) ? "activeBullet" : ""}`}></span>)
                 }
             </div>
         </ConfessionsWrap>
