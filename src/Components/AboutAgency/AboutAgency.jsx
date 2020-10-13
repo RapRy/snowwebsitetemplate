@@ -9,12 +9,19 @@ export default function AboutAgency() {
         padding:40px 10px;
         text-align:center;
 
+        @media all and (min-width:701px){padding:90px 20px;}
+
         h1{
             font-family: "Playfair Display", serif;
             font-weight:800;
             font-size:1.25rem;
             padding-bottom:15px;
             color:#161616;
+
+            @media all and (min-width:701px){
+                font-size:1.8rem;
+                padding-bottom:30px;
+            }
         }
 
         p{
@@ -23,6 +30,12 @@ export default function AboutAgency() {
             padding-bottom:15px;
             line-height:1.4;
             color:#252525;
+
+            @media all and (min-width:701px){
+                font-size:.9rem;
+                line-height:1.6;
+                padding:0 60px 30px;
+            }
         }
     `;
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { HeroNav, AboutAgency, AgencyContainer, BestProjects, PartnersConfessions, LatestBlog, ContactInfo } from './Components'
+import { HeroNav, AboutAgency, AgencyContainer, BestProjects, PartnersConfessions, LatestBlog, ContactInfo, Footer } from './Components'
 
 import GlobalStyle from './globalStyles'
 
@@ -23,6 +23,8 @@ class App extends Component {
           <LatestBlog />
 
           <ContactInfo />
+
+          <Footer />
       </div>
     )
   }

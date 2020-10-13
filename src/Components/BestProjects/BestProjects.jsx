@@ -32,6 +32,8 @@ export default function BestProjects() {
             line-height:1.4;
             color:#252525;
         }
+
+        
     `;
 
     const images = [Portfolio1, Portfolio2, Portfolio3, Portfolio4, Portfolio5, Portfolio6, Portfolio7, Portfolio8, Portfolio9];

@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import logoLight from '../../images/logo-light.png';
 import heroBg from '../../images/hero-bg.jpg';
 
 import styled from 'styled-components'
+import {useSpring, animated} from 'react-spring'
 
 function HeroNav() {
+    const [navToggle, setNavToggle] = useState(false);
+    const navLinksRef = useRef(null);
+
+    const clickHandler = (e) => {
+        e.preventDefault();
+        if(navToggle === false){
+            setNavToggle(true)
+        }else{
+            setNavToggle(false)
+        }
+    }
+
     const HeroNavCont = styled.div`
         background-image:url(${props => props.bg});
         background-size:cover;
@@ -18,35 +31,102 @@ function HeroNav() {
             align-items:center;
             padding:10px;
 
+            @media all and (min-width:701px){
+                padding-bottom:20px;
+            }
+
             img{
                 justify-self:left;
                 width:50%;
+
+                @media all and (min-width:701px){
+                    width:30%;
+                }
             }
 
             .navigation{
                 justify-self:right;
 
-                a.burgerIcon span{
-                    width:30px;
-                    height:5px;
-                    display:block;
-                    background-color:#fff;
-                    margin-bottom:5px;
-                    border-radius:2px;
 
-                    &:last-child{margin-bottom:0;}
+                a.burgerIcon{
+                    display:block;
+                    width:30px;
+                    height:20px;
+                    position:relative;
+                    top:0;
+                    right:0;
+                    z-index:2;
+
+                    @media all and (min-width:701px){
+                        display:none;
+                    }
+
+                    span{
+                        width:30px;
+                        height:5px;
+                        background-color:#fff;
+                        position:absolute;
+                        top:0;
+                        left:0;
+                        border-radius:2px;
+
+                        &:nth-child(2){
+                            top:10px;
+                        }
+
+                        &:nth-child(3){
+                            top:${props => (props.navToggle) ? "5px" : "20px"};
+                        }
+                    }
                 }
 
-                .navlinks{
-                    display:none;
+                .navlinks{         
                     background:#252525;
-                    padding:40px 0 0;
+                    padding:80px 0 0;
                     position:absolute;
-                    right:0;
+                    right:-1000px;
                     top:0;
                     width:60%;
                     height:100%;
                     text-align:right;
+
+                    @media all and (min-width:701px){
+                        display:block;
+                        position:relative;
+                        background:none;
+                        padding:0;
+                        width:100%;
+                        height:100%;
+                    }
+
+                    li{
+                        padding:0 10px 30px 20px;
+                        text-align:left;
+
+                        &:last-child{
+                            padding-bottom:0;
+                        }
+
+                        @media all and (min-width:701px){
+                            border-bottom:none;
+                            display:inline-block;
+                            padding:10px;
+                        }
+
+                        a{
+                            font-size:1rem;
+                            color:#fff;
+                            font-family:"Work Sans", sans-serif;
+                            font-weight:500;  
+
+                            // @media all and (min-width:701px){
+                            //     font-size:1rem;
+                            //     color:#fff;
+                            //     font-family:"Work Sans", sans-serif;
+                            //     font-weight:500;
+                            // }
+                        }
+                    }
                 }
             }
         }
@@ -55,11 +135,17 @@ function HeroNav() {
             padding:40px 0 50px;
             text-align:center;
 
+            @media all and (min-width:701px){
+                padding:200px 0 140px;
+            }
+
             h5{
                 font-family: "Work Sans", sans-serif;
                 font-weight:700;
                 color:#fff;
                 font-size:.8rem;
+
+                @media all and (min-width:701px){font-size:1.5rem;}
             }
 
             p{
@@ -67,6 +153,8 @@ function HeroNav() {
                 font-weight:800;
                 font-size:1.25rem;
                 color:#fff;
+
+                @media all and (min-width:701px){font-size:2.3rem;}
 
                 span{display:block;}
 
@@ -78,22 +166,66 @@ function HeroNav() {
         }
     `;
 
+    const animateUl = useSpring({right: navToggle ? "0px" : "-1000px", from:{right: "-1000px"}, config:{duration:200}})
+
+    const animateSpan1 = useSpring({
+        transform: navToggle ? "rotate(45deg)" : "rotate(0deg)",
+        top: navToggle ? "5px" : "0px",
+
+        from:{
+            top:"0px",
+            transform: "rotate(0deg)"
+        },
+        config:{duration:200}
+    })
+
+    const animateSpan2 = useSpring({opacity: navToggle ? 0 : 1, from:{opacity:1}, config:{duration:200}})
+
+    const animateSpan3 = useSpring({
+        transform: navToggle ? "rotate(-45deg)" : "rotate(0deg)",
+        top: navToggle ? "5px" : "20px",
+
+        from:{
+            top:"20px",
+            transform: "rotate(0deg)"
+        },
+        config:{duration:200}
+    })
+
+    useEffect(() => {
+
+        window.addEventListener('resize', function(){
+            if(window.matchMedia('(min-width:701px)').matches){
+                navLinksRef.current.style.right = "0px";
+            }else{
+                navLinksRef.current.style.right = "-1000px";  
+            }
+        })
+
+        if(window.matchMedia('(min-width:701px)').matches){
+            navLinksRef.current.style.right = "0px";
+        }else{
+            navLinksRef.current.style.right = "-1000px";  
+        }
+
+    }, [navLinksRef])
+
     return (
-        <HeroNavCont bg={heroBg}>
+        <HeroNavCont bg={heroBg} navToggle={navToggle}>
             <div className="logoNavCont">
                 <img src={logoLight} alt=""/>
                 <nav className="navigation">
-                    <a href="#" className="burgerIcon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <a href="#" className="burgerIcon" onClick={clickHandler}>
+                        <animated.span style={animateSpan1}></animated.span>
+                        <animated.span style={animateSpan2}></animated.span>
+                        <animated.span style={animateSpan3}></animated.span>
                     </a>
-                    <ul className="navlinks">
+                    <animated.ul className="navlinks" ref={navLinksRef} style={animateUl}>
                         <li><a href="#">WORK</a></li>
                         <li><a href="#">ABOUT</a></li>
                         <li><a href="#">BLOG</a></li>
                         <li><a href="#">CONTACT</a></li>
-                    </ul>
+                    </animated.ul>
                 </nav>
             </div>
             <div className="heroPhrase">

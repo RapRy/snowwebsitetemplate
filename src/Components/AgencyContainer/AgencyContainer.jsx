@@ -16,6 +16,13 @@ export default function AgencyContainer() {
             display:grid;
             grid-template-columns:repeat(2, 1fr);
             grid-gap:5px;
+
+            @media all and (min-width:701px){
+                grid-template-columns:repeat(4, 1fr);
+                grid-gap:10px;
+                align-items:start;
+                padding:40px 30px;
+            }
         }
     `;
 
@@ -26,22 +33,35 @@ export default function AgencyContainer() {
         &:nth-child(3){padding-bottom:0;}
         &:nth-child(4){padding-bottom:0;}
 
+        @media all and (min-width:701px){padding-bottom:0;}
+
         .iconFontsize{
             font-size:2rem;
+
+            @media all and (min-width:701px){font-size:2.5rem;}
         }
 
         .iconText{
             padding-top:5px;
 
-            span{
-            font-family: "Work Sans", sans-serif;
-            display:block;
-            font-size:.75rem;
+            @media all and (min-width:701px){padding-top:0;}
 
-            &:first-child{
-                font-size:.8rem;
-                font-weight:600;
-            }
+            span{
+                font-family: "Work Sans", sans-serif;
+                display:block;
+                font-size:.75rem;
+
+                @media all and (min-width:701px){font-size:.9rem;}
+
+                &:first-child{
+                    font-size:.8rem;
+                    font-weight:600;
+
+                    @media all and (min-width:701px){
+                        padding-bottom:10px;
+                        font-size:1rem;
+                    }
+                }
             }
         }
     `;
@@ -52,32 +72,32 @@ export default function AgencyContainer() {
                 <AgencyIcon>
                     <BusinessCenterOutlined className="iconFontsize" />
                     <div className="iconText">
-                    <span>548</span>
-                    <span>PROJECTS COMPLETED</span>
+                        <span>548</span>
+                        <span>PROJECTS COMPLETED</span>
                     </div>
                 </AgencyIcon>
 
                 <AgencyIcon>
                     <AccessTimeOutlined className="iconFontsize" />
                     <div className="iconText">
-                    <span>1465</span>
-                    <span>WORKING HOURS</span>
+                        <span>1465</span>
+                        <span>WORKING HOURS</span>
                     </div>
                 </AgencyIcon>
 
                 <AgencyIcon>
                     <StarBorderOutlined className="iconFontsize" />
                     <div className="iconText">
-                    <span>612</span>
-                    <span>POSITIVE FEEDBACKS</span>
+                        <span>612</span>
+                        <span>POSITIVE FEEDBACKS</span>
                     </div>
                 </AgencyIcon>
 
                 <AgencyIcon>
                     <FavoriteBorderOutlined className="iconFontsize" />
                     <div className="iconText">
-                    <span>735</span>
-                    <span>HAPPY CLIENTS</span>
+                        <span>735</span>
+                        <span>HAPPY CLIENTS</span>
                     </div>
                 </AgencyIcon>
 

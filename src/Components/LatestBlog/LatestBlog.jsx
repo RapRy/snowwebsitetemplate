@@ -143,7 +143,7 @@ class LatestBlog extends Component {
                                 const { image, category, title, date, description } = blog;
 
                                 return(
-                                    <div className="blogPost">
+                                    <div className="blogPost" key={i}>
                                         <div className="postImgWrapper">
                                             <img src={require(`../../images/${image}`)} />
                                             <span>{category}</span>
