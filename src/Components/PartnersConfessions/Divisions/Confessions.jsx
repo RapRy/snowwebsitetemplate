@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 
 import styled from 'styled-components'
 
@@ -12,21 +12,25 @@ export default function Confessions() {
             author: "sit amet consectetur"}
     ]
 
-    const [height, setHeight] = useState(0);
+    const confessionRef = useRef(null);
+    const confessionSlider = useRef(null);
 
     const confessionRefs = []
 
-    const confessRef = React.createRef();
+    const confessionBullet = []
 
     const ConfessionsWrap = styled.div`
         padding:40px 10px;
         text-align:center;
         background:url(${props => props.bg}) no-repeat top center;
 
+        @media all and (min-width:510px){
+            padding:40px 15px;
+        }
+
         .confessionsSlider{
             margin-bottom:30px;
             position:relative;
-            min-height:${props => props.height}px;
         }
 
         .confessionSlide{
@@ -35,6 +39,7 @@ export default function Confessions() {
             top:0;
             left:0;
             opacity:0;
+            transition:opacity 500ms ease-in-out;
 
             &.active{
                 opacity:1;
@@ -48,6 +53,11 @@ export default function Confessions() {
                 color:#fff;
                 padding-bottom:10px;
                 font-weight:400;
+
+                @media all and (min-width:510px){
+                    font-size:1rem;
+                    padding-bottom:20px;
+                }
             }
 
             span{
@@ -55,6 +65,10 @@ export default function Confessions() {
                 font-size:.8rem;
                 text-transform:uppercase;
                 color:#fff;
+
+                @media all and (min-width:510px){
+                    font-size:.9rem;
+                }
             }
         }
 
@@ -67,6 +81,7 @@ export default function Confessions() {
                 border-radius:5px;
                 vertical-align:middle;
                 margin-right:5px;
+                transition:width 300ms ease-in-out, height 300ms ease-in-out;
 
                 &:last-child{margin-right:0;}
 
@@ -79,13 +94,35 @@ export default function Confessions() {
         }
     `;
 
+    const clickHandler = (i, e) => {
+        confessionRefs.forEach((confess) => confess.classList.remove("active"))
+        confessionBullet.forEach((bullet) => bullet.classList.remove("activeBullet"))
+        confessionRefs[i].classList.add("active")
+        confessionBullet[i].classList.add("activeBullet")
+    }
+
     useEffect(() => {
-        setHeight(confessionRefs[0].clientHeight)
-    })
+        confessionSlider.current.style.cssText = `min-height:${confessionRefs[0].clientHeight}px`;
+
+        let i = 0;
+
+        setInterval(() => {
+            if(i >= confessionRefs.length){
+                i = 0
+            }else{
+                confessionRefs.forEach((confess) => confess.classList.remove("active"))
+                confessionBullet.forEach((bullet) => bullet.classList.remove("activeBullet"))
+                confessionRefs[i].classList.add("active")
+                confessionBullet[i].classList.add("activeBullet")
+                i++
+            }
+        }, 5000)
+
+    }, [])
 
     return (
-        <ConfessionsWrap bg={BgPattern} height={height}>
-            <div className="confessionsSlider">
+        <ConfessionsWrap bg={BgPattern} ref={confessionRef}>
+            <div className="confessionsSlider" ref={confessionSlider}>
                 {
                     confessions.map((confess, i) => {
                         return(
@@ -99,7 +136,7 @@ export default function Confessions() {
             </div>
             <div className="confessionsSliderBullet">
                 {
-                    confessions.map((bullet, i) => <span key={i} className={`${(i === 0) ? "activeBullet" : ""}`}></span>)
+                    confessions.map((bullet, i) => <span ref={confessBullet => confessionBullet.push(confessBullet)} onClick={(e) => clickHandler(i,e)} key={i} className={`${(i === 0) ? "activeBullet" : ""}`}></span>)
                 }
             </div>
         </ConfessionsWrap>

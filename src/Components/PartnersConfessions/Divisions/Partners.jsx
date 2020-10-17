@@ -12,6 +12,10 @@ export default function Partners() {
     const PartnersWrap = styled.div`
         padding:10px 10px 20px;
 
+        @media all and (min-width:510px){
+            padding:20px 15px;
+        }
+
         ul{
             display:grid;
             grid-template-columns:repeat(6, 1fr);
@@ -23,6 +27,12 @@ export default function Partners() {
                 :nth-child(3){grid-column: 5/7;}
                 :nth-child(4){grid-column: 2/4;}
                 :nth-child(5){grid-column: 4/6;}
+
+                img{
+                    @media all and (min-width:510px){
+                        width:80%;
+                    }
+                }
             }
         }
     `;

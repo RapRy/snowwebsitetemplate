@@ -10,20 +10,12 @@ function HeroNav() {
     const [navToggle, setNavToggle] = useState(false);
     const navLinksRef = useRef(null);
 
-    const clickHandler = (e) => {
-        e.preventDefault();
-        if(navToggle === false){
-            setNavToggle(true)
-        }else{
-            setNavToggle(false)
-        }
-    }
-
     const HeroNavCont = styled.div`
         background-image:url(${props => props.bg});
         background-size:cover;
         background-repeat:no-repeat;
         background-position:top center;
+        overflow-x:hidden;
 
         .logoNavCont{
             display:grid;
@@ -31,7 +23,7 @@ function HeroNav() {
             align-items:center;
             padding:10px;
 
-            @media all and (min-width:701px){
+            @media all and (min-width:510px){
                 padding-bottom:20px;
             }
 
@@ -39,7 +31,7 @@ function HeroNav() {
                 justify-self:left;
                 width:50%;
 
-                @media all and (min-width:701px){
+                @media all and (min-width:510px){
                     width:30%;
                 }
             }
@@ -49,7 +41,7 @@ function HeroNav() {
 
 
                 a.burgerIcon{
-                    display:block;
+                    display:inline-block;
                     width:30px;
                     height:20px;
                     position:relative;
@@ -89,9 +81,9 @@ function HeroNav() {
                     width:60%;
                     height:100%;
                     text-align:right;
+                    display:${props => props.navToggle && "block"};
 
                     @media all and (min-width:701px){
-                        display:block;
                         position:relative;
                         background:none;
                         padding:0;
@@ -135,7 +127,7 @@ function HeroNav() {
             padding:40px 0 50px;
             text-align:center;
 
-            @media all and (min-width:701px){
+            @media all and (min-width:510px){
                 padding:200px 0 140px;
             }
 
@@ -145,7 +137,7 @@ function HeroNav() {
                 color:#fff;
                 font-size:.8rem;
 
-                @media all and (min-width:701px){font-size:1.5rem;}
+                @media all and (min-width:510px){font-size:1.5rem;}
             }
 
             p{
@@ -154,7 +146,7 @@ function HeroNav() {
                 font-size:1.25rem;
                 color:#fff;
 
-                @media all and (min-width:701px){font-size:2.3rem;}
+                @media all and (min-width:510px){font-size:2.3rem;}
 
                 span{display:block;}
 
@@ -192,6 +184,18 @@ function HeroNav() {
         config:{duration:200}
     })
 
+    const clickHandler = (e) => {
+        e.preventDefault();
+        if(navToggle === false){
+            setNavToggle(true)
+        }else{
+            setNavToggle(false)
+            setTimeout(() => {
+                navLinksRef.current.style.display = "none";
+            }, 200)
+        }
+    }
+
     useEffect(() => {
 
         window.addEventListener('resize', function(){
@@ -208,7 +212,7 @@ function HeroNav() {
             navLinksRef.current.style.right = "-1000px";  
         }
 
-    }, [navLinksRef])
+    }, [])
 
     return (
         <HeroNavCont bg={heroBg} navToggle={navToggle}>

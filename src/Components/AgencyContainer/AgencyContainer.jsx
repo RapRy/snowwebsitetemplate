@@ -17,7 +17,7 @@ export default function AgencyContainer() {
             grid-template-columns:repeat(2, 1fr);
             grid-gap:5px;
 
-            @media all and (min-width:701px){
+            @media all and (min-width:510px){
                 grid-template-columns:repeat(4, 1fr);
                 grid-gap:10px;
                 align-items:start;
@@ -33,31 +33,31 @@ export default function AgencyContainer() {
         &:nth-child(3){padding-bottom:0;}
         &:nth-child(4){padding-bottom:0;}
 
-        @media all and (min-width:701px){padding-bottom:0;}
+        @media all and (min-width:510px){padding-bottom:0;}
 
         .iconFontsize{
             font-size:2rem;
 
-            @media all and (min-width:701px){font-size:2.5rem;}
+            @media all and (min-width:510px){font-size:2.5rem;}
         }
 
         .iconText{
             padding-top:5px;
 
-            @media all and (min-width:701px){padding-top:0;}
+            @media all and (min-width:510px){padding-top:0;}
 
             span{
                 font-family: "Work Sans", sans-serif;
                 display:block;
                 font-size:.75rem;
 
-                @media all and (min-width:701px){font-size:.9rem;}
+                @media all and (min-width:510px){font-size:.9rem;}
 
                 &:first-child{
                     font-size:.8rem;
                     font-weight:600;
 
-                    @media all and (min-width:701px){
+                    @media all and (min-width:510px){
                         padding-bottom:10px;
                         font-size:1rem;
                     }
@@ -65,6 +65,7 @@ export default function AgencyContainer() {
             }
         }
     `;
+    
     return (
         <AgencyContainer bgPattern={BgPattern}>
             <div className="agencyIcons">

@@ -17,12 +17,20 @@ export default function BestProjects() {
         padding:40px 10px;
         text-align:center;
 
+        @media all and (min-width:510px){
+            padding:60px 15px;
+        }
+
         h1{
             font-family: "Playfair Display", serif;
             font-weight:800;
             font-size:1.25rem;
             padding-bottom:15px;
             color:#161616;
+
+            @media all and (min-width:510px){
+                font-size:1.7rem;
+            }
         }
 
         p{
@@ -31,9 +39,53 @@ export default function BestProjects() {
             padding-bottom:15px;
             line-height:1.4;
             color:#252525;
+
+            @media all and (min-width:510px){
+                font-size:.9rem;
+            }
         }
 
-        
+        .projectsImg{
+            @media all and (min-width:510px){
+                display:grid;
+                grid-template-columns:repeat(2,1fr);
+                grid-auto-rows:180px;
+                grid-gap:10px;
+
+                .imgCont{
+                    &:nth-child(1){
+                        grid-column:1/2;
+                        grid-row:1/2;
+                    }
+
+                    &:nth-child(2){
+                        grid-column:2/3;
+                        grid-row:1/span 2;
+                    }
+
+                    &:nth-child(3){
+                        grid-column:1/2;
+                        grid-row:2/3;
+                    }
+
+                    &:nth-child(6){
+                        grid-column:1/2;
+                        grid-row:3/span 2;
+                    }
+
+                    &:nth-child(7){
+                        grid-column:1/2;
+                        grid-row:5/span 2;
+                    }
+
+                    img{
+                        object-fit:cover;
+                        width:100%;
+                        height:100%;
+                    }
+                }
+            }
+        }
     `;
 
     const images = [Portfolio1, Portfolio2, Portfolio3, Portfolio4, Portfolio5, Portfolio6, Portfolio7, Portfolio8, Portfolio9];

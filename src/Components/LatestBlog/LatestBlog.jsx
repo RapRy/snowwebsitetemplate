@@ -3,6 +3,84 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 class LatestBlog extends Component {
+    constructor(){
+        super()
+        this.blogs = [
+            {
+                image: "blog-nature-1.jpg",
+                category: "Nature",
+                title: "Something I need to tell you",
+                date: "MAY 16, 2016",
+                description: "Aliquam leo lacus, vehicula ac eros vel, imperdiet convallis tortor. Ut porta turpis id urna venenatis, ac egestas mauris euismod."
+            },
+            {
+                image: "blog-branding-1.jpg",
+                category: "Branding",
+                title: "Are you doing the right way?",
+                date: "MAY 28, 2016",
+                description: "Aenean faucibus egestas egestas. Integer volutpat tellus vitae ligula mollis varius. Duis in eros malesuada, auctor diam ut, feugiat urna."
+            },
+            {
+                image: "blog-design-1.jpg",
+                category: "Design",
+                title: "Why you should always first",
+                date: "June 01, 2016",
+                description: "Nulla id odio hendrerit, convallis mauris et, pellentesque ligula. Etiam venenatis eget felis eu aliquam. Pellentesque rhoncus odio eros, a vestibulum lectus porta ac."
+            },
+            {
+                image: "blog-branding-2.jpg",
+                category: "Branding",
+                title: "Something I need to tell you",
+                date: "MAY 16, 2016",
+                description: "Aliquam leo lacus, vehicula ac eros vel, imperdiet convallis tortor. Ut porta turpis id urna venenatis, ac egestas mauris euismod."
+            },
+            {
+                image: "blog-design-2.jpg",
+                category: "Design",
+                title: "Why you should always first",
+                date: "June 01, 2016",
+                description: "Nulla id odio hendrerit, convallis mauris et, pellentesque ligula. Etiam venenatis eget felis eu aliquam. Pellentesque rhoncus odio eros, a vestibulum lectus porta ac."
+            },
+            {
+                image: "blog-nature-3.jpg",
+                category: "Nature",
+                title: "Something I need to tell you",
+                date: "MAY 16, 2016",
+                description: "Aliquam leo lacus, vehicula ac eros vel, imperdiet convallis tortor. Ut porta turpis id urna venenatis, ac egestas mauris euismod."
+            },
+            {
+                image: "blog-city-1.jpg",
+                category: "City",
+                title: "Something I need to tell you",
+                date: "MAY 16, 2016",
+                description: "Aliquam leo lacus, vehicula ac eros vel, imperdiet convallis tortor. Ut porta turpis id urna venenatis, ac egestas mauris euismod."
+            },
+        ]
+        this.blogsCont = []
+        this.state = {
+            blogsCont: [],
+            bullets: []
+        }
+    }
+
+    divideBlogs = () => {
+        let bullets = [];
+        let contLimit = 3;
+        let divLimit = this.blogs.length / contLimit;
+        let blogsCont = [];
+
+        for(let i = 0; i < divLimit; i++){
+            blogsCont.push(this.blogs.splice(0, contLimit))
+            bullets.push(i);
+        }
+
+        this.setState({blogsCont, bullets})
+    }
+
+    componentDidMount(){
+        this.divideBlogs();
+    }
+
     render() {
         const BlogContainer = styled.div`
             background-color:#ebebeb;
@@ -12,13 +90,25 @@ class LatestBlog extends Component {
                 padding:40px 10px;
                 text-align:center;
 
+                @media all and (min-width:510px){
+                    padding:60px 15px;
+                }
+
                 .blogHeading{
+                    @media all and (min-width:510px){
+                        padding-bottom:20px;
+                    }
+
                     h1{
                         font-family: "Playfair Display", serif;
                         font-weight:800;
                         font-size:1.25rem;
                         padding-bottom:15px;
                         color:#161616;
+
+                        @media all and (min-width:510px){
+                            font-size:1.75rem;
+                        }
                     }
 
                     p{
@@ -27,11 +117,27 @@ class LatestBlog extends Component {
                         line-height:1.4;
                         color:#252525;
                         font-family:"Work Sans", sans-serif;
+
+                        @media all and (min-width:510px){
+                            font-size:.9rem;
+                        }
                     }
                 }
 
                 .blogSlide{
                     padding-bottom:10px;
+
+                    @media all and (min-width:510px){
+                        padding-bottom:20px;
+                    }
+
+                    .slide{
+                        display:none;
+
+                        &.active{
+                            display:block;
+                        }
+                    }
 
                     .blogPost{
                         display:grid;
@@ -41,6 +147,10 @@ class LatestBlog extends Component {
                         background-color:#f6f6f6;
                         box-shadow:0px 0px 10px rgba(0,0,0,.2);
                         margin-bottom:10px;
+
+                        @media all and (min-width:510px){
+                            grid-template-columns:200px 1fr;
+                        }
 
                         .postImgWrapper{
                             position:relative;
@@ -59,6 +169,10 @@ class LatestBlog extends Component {
                                 color:#fff;
                                 font-size:.7rem;
                                 background:#252525;
+
+                                @media all and (min-width:510px){
+                                    font-size:.8rem;
+                                }
                             }
                         }
 
@@ -75,10 +189,22 @@ class LatestBlog extends Component {
                                 font-family: "Work Sans", sans-serif;
                                 font-weight:600;
                                 font-size:.7rem;
+
+                                @media all and (min-width:510px){
+                                    padding-bottom:10px;
+                                    display:inline-block;
+                                }
                             }
 
                             p{
                                 display:none;
+
+                                @media all and (min-width:510px){
+                                    font-size: .8rem;
+                                    font-family: "Work Sans", sans-serif;
+                                    line-height: 1.4;
+                                    display:block;
+                                }
                             }
                         }
                     }
@@ -106,29 +232,6 @@ class LatestBlog extends Component {
             }
         `;
 
-        const blogs = [
-            {
-                image: "blog-nature-1.jpg",
-                category: "Nature",
-                title: "Something I need to tell you",
-                date: "MAY 16, 2016",
-                description: "Aliquam leo lacus, vehicula ac eros vel, imperdiet convallis tortor. Ut porta turpis id urna venenatis, ac egestas mauris euismod."
-            },
-            {
-                image: "blog-branding-1.jpg",
-                category: "Branding",
-                title: "Are you doing the right way?",
-                date: "MAY 28, 2016",
-                description: "Aenean faucibus egestas egestas. Integer volutpat tellus vitae ligula mollis varius. Duis in eros malesuada, auctor diam ut, feugiat urna."
-            },
-            {
-                image: "blog-design-1.jpg",
-                category: "Design",
-                title: "Why you should always first",
-                date: "June 01, 2016",
-                description: "Nulla id odio hendrerit, convallis mauris et, pellentesque ligula. Etiam venenatis eget felis eu aliquam. Pellentesque rhoncus odio eros, a vestibulum lectus porta ac."
-            }
-        ]
 
         return (
             <BlogContainer>
@@ -138,21 +241,30 @@ class LatestBlog extends Component {
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eleifend tristique nisl at elementum. Maecenas vitae convallis ante, sit amet egestas ipsum.</p>
                     </div>
                     <div className="blogSlide">
+                        {console.log(this.state.bullets)}
                         {
-                            blogs.map((blog, i) => {
-                                const { image, category, title, date, description } = blog;
-
+                            this.state.blogsCont.map((cont, i) => {
                                 return(
-                                    <div className="blogPost" key={i}>
-                                        <div className="postImgWrapper">
-                                            <img src={require(`../../images/${image}`)} />
-                                            <span>{category}</span>
-                                        </div>
-                                        <div className="postDetails">
-                                            <h3>{title}</h3>
-                                            <span>{date}</span>
-                                            <p>{description}</p>
-                                        </div>
+                                    <div className={`slide slide${i} ${(i === 0) ? "active" : ""}`} key={i}>
+                                        {
+                                            cont.map((blog, x) => {
+                                                const { image, category, title, date, description } = blog;
+
+                                                return(
+                                                    <div className="blogPost" key={x}>
+                                                        <div className="postImgWrapper">
+                                                            <img src={require(`../../images/${image}`)} />
+                                                            <span>{category}</span>
+                                                        </div>
+                                                        <div className="postDetails">
+                                                            <h3>{title}</h3>
+                                                            <span>{date}</span>
+                                                            <p>{description}</p>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
                                     </div>
                                 )
                             })
@@ -160,7 +272,7 @@ class LatestBlog extends Component {
                     </div>
                     <div className="blogSlideBullet">
                         {
-                            blogs.map((blog, i) => <span key={i} className={`${(i === 0) ? "activeBullet" : ""}`}></span>)
+                            this.state.bullets.map((blog, i) => <span key={i} className={`${(i === 0) ? "activeBullet" : ""}`}></span>)
                         }
                     </div>
                 </div>
