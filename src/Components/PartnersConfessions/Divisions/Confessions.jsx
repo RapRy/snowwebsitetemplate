@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 
 import styled from 'styled-components'
 
@@ -19,6 +19,8 @@ export default function Confessions() {
 
     const confessionBullet = []
 
+    let ind = 0;
+
     const ConfessionsWrap = styled.div`
         padding:40px 10px;
         text-align:center;
@@ -31,6 +33,13 @@ export default function Confessions() {
         .confessionsSlider{
             margin-bottom:30px;
             position:relative;
+
+            @media all and (min-width:1000px){
+                width:1000px;
+                margin:0 auto 30px;
+                padding-left:80px;
+                padding-right:80px;
+            }
         }
 
         .confessionSlide{
@@ -58,6 +67,11 @@ export default function Confessions() {
                     font-size:1rem;
                     padding-bottom:20px;
                 }
+
+                @media all and (min-width:700px){
+                    padding-left:60px;
+                    padding-right:60px;
+                }
             }
 
             span{
@@ -81,7 +95,6 @@ export default function Confessions() {
                 border-radius:5px;
                 vertical-align:middle;
                 margin-right:5px;
-                transition:width 300ms ease-in-out, height 300ms ease-in-out;
 
                 &:last-child{margin-right:0;}
 
@@ -99,22 +112,22 @@ export default function Confessions() {
         confessionBullet.forEach((bullet) => bullet.classList.remove("activeBullet"))
         confessionRefs[i].classList.add("active")
         confessionBullet[i].classList.add("activeBullet")
+        ind = 0
     }
 
     useEffect(() => {
         confessionSlider.current.style.cssText = `min-height:${confessionRefs[0].clientHeight}px`;
 
-        let i = 0;
-
         setInterval(() => {
-            if(i >= confessionRefs.length){
-                i = 0
+            if(ind >= confessionRefs.length){
+                ind = 0
             }else{
                 confessionRefs.forEach((confess) => confess.classList.remove("active"))
                 confessionBullet.forEach((bullet) => bullet.classList.remove("activeBullet"))
-                confessionRefs[i].classList.add("active")
-                confessionBullet[i].classList.add("activeBullet")
-                i++
+                confessionRefs[ind].classList.add("active")
+                confessionBullet[ind].classList.add("activeBullet")
+                confessionSlider.current.style.cssText = `min-height:${confessionRefs[ind].clientHeight}px`;
+                ind++
             }
         }, 5000)
 

@@ -17,6 +17,11 @@ function HeroNav() {
         background-position:top center;
         overflow-x:hidden;
 
+        @media all and (min-width:1000px){
+            display:flex;
+            flex-direction:column;
+        }
+
         .logoNavCont{
             display:grid;
             grid-template-columns:repeat(2, 1fr);
@@ -25,6 +30,12 @@ function HeroNav() {
 
             @media all and (min-width:510px){
                 padding-bottom:20px;
+            }
+
+            @media all and (min-width:1000px){
+                width:1000px;
+                margin:0 auto;
+                padding:20px;
             }
 
             img{
@@ -131,6 +142,10 @@ function HeroNav() {
                 padding:200px 0 140px;
             }
 
+            @media all and (min-width:1000px){
+                padding:240px 0;
+            }
+
             h5{
                 font-family: "Work Sans", sans-serif;
                 font-weight:700;
@@ -138,6 +153,8 @@ function HeroNav() {
                 font-size:.8rem;
 
                 @media all and (min-width:510px){font-size:1.5rem;}
+
+                @media all and (min-width:1000px){font-size:2rem;}
             }
 
             p{
@@ -147,6 +164,8 @@ function HeroNav() {
                 color:#fff;
 
                 @media all and (min-width:510px){font-size:2.3rem;}
+
+                @media all and (min-width:1000px){font-size:2.8rem;}
 
                 span{display:block;}
 

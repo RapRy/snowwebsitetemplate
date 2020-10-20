@@ -30,12 +30,27 @@ function Footer() {
             text-align:center;
             padding:40px 10px;
 
+            @media all and (min-width:700px){
+                padding:60px 15px;
+                display:grid;
+                grid-template-columns:repeat(3, 1fr);
+                grid-gap:20px;
+            }
+
+            @media all and (min-width:1000px){
+                width:1000px;
+                margin:0 auto;
+                grid-gap:30px;
+            }
+
             h4{
                 font-weight:800;
                 font-size:1rem;
                 padding-bottom:15px;
                 color:#fff;
                 font-family: "Playfair Display", serif;
+
+                @media all and (min-width:700px){text-align:left;}
             }
 
             p{
@@ -51,8 +66,12 @@ function Footer() {
             .aboutUs{
                 padding-bottom:20px;
 
+                @media all and (min-width:700px){padding-bottom:0px;}
+
                 ul{
                     padding-top:10px;
+
+                    @media all and (min-width:700px){text-align:left;}
 
                     li{
                         display:inline-block;
@@ -65,6 +84,8 @@ function Footer() {
                         a{
                             color:#fff;
                             font-size:1.5rem;
+
+                            @media all and (min-width:700px){font-size:1.3rem;}
                         }
                     }
                 }
@@ -72,6 +93,8 @@ function Footer() {
 
             .latestTwits{
                 padding-bottom:20px;
+
+                @media all and (min-width:700px){padding-bottom:0px;}
 
                 .twits{
                     article{
@@ -84,11 +107,21 @@ function Footer() {
                             padding-bottom:0;
                         }
 
+                        @media all and (min-width:700px){
+                            grid-column-gap:10px;
+                        }
+
                         svg{
                             color:#fff;
                             font-size:1rem;
                             align-self:center;
                             justify-self:end;
+
+                            @media all and (min-width:700px){
+                                align-self:start;
+                                padding-top:5px;
+                                font-size:1.2rem;
+                            }
                         }
 
                         p{

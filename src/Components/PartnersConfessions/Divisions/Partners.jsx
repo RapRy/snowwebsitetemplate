@@ -16,10 +16,24 @@ export default function Partners() {
             padding:20px 15px;
         }
 
+        @media all and (min-width:700px){
+            padding:30px 15px;
+        }
+
+        @media all and (min-width:1000px){
+            width:1000px;
+            margin:0 auto;
+        }
+
         ul{
             display:grid;
             grid-template-columns:repeat(6, 1fr);
             grid-gap:5px;
+
+            @media all and (min-width:700px){
+                grid-template-columns:repeat(5, 1fr);
+                grid-gap:10px;
+            }
 
             li{
                 :nth-child(1){grid-column: 1/3;}
@@ -28,9 +42,21 @@ export default function Partners() {
                 :nth-child(4){grid-column: 2/4;}
                 :nth-child(5){grid-column: 4/6;}
 
+                @media all and (min-width:700px){
+                    :nth-child(1){grid-column: 1/2;}
+                    :nth-child(2){grid-column: 2/3;}
+                    :nth-child(3){grid-column: 3/4;}
+                    :nth-child(4){grid-column: 4/5;}
+                    :nth-child(5){grid-column: 5/6;}
+                }
+
                 img{
                     @media all and (min-width:510px){
                         width:80%;
+                    }
+
+                    @media all and (min-width:700px){
+                        width:100%;
                     }
                 }
             }

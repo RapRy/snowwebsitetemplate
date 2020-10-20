@@ -11,8 +11,31 @@ class ContactInfo extends Component {
                 padding:40px 10px;
                 text-align:center;
 
+                @media all and (min-width:510px){
+                    padding:60px 15px;
+                }
+
+                @media all and (min-width:700px){
+                    padding:90px 15px;
+                    display:grid;
+                    grid-template-columns: .7fr 1fr;
+                    grid-gap:30px;
+                }
+
+                @media all and (min-width:1000px){
+                    width:1000px;
+                    margin:0 auto;
+                }
+
                 .contactDetails{
                     padding-bottom:20px;
+
+                    @media all and (min-width:510px){padding-bottom:30px}
+
+                    @media all and (min-width:700px){
+                        text-align:left;
+                        padding-bottom:0px;
+                    }
 
                     h1{
                         font-family: "Playfair Display", serif;
@@ -20,6 +43,8 @@ class ContactInfo extends Component {
                         font-size:1.25rem;
                         padding-bottom:15px;
                         color:#161616;
+
+                        @media all and (min-width:510px){font-size:1.7rem;}
                     }
 
                     p{
@@ -29,6 +54,8 @@ class ContactInfo extends Component {
                         color:#252525;
                         text-align:justify;
                         font-family: "Work Sans", sans-serif;
+
+                        @media all and (min-width:510px){font-size:.9rem;}
                     }
 
                     ul{
@@ -41,12 +68,18 @@ class ContactInfo extends Component {
                             line-height:1.4;
                             color:#252525;
 
+                            @media all and (min-width:510px){font-size:.9rem;}
+
                             span{font-weight:600;}
                         }
                     }
                 }
 
                 .contactForm{
+                    @media all and (min-width:700px){
+                        align-self:end;
+                    }
+
                     .formDiv{
                         padding-bottom:10px;
 

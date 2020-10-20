@@ -11,6 +11,11 @@ export default function AboutAgency() {
 
         @media all and (min-width:510px){padding:90px 20px;}
 
+        @media all and (min-width:1000px){
+            width:1000px;
+            margin:0 auto;
+        }
+
         h1{
             font-family: "Playfair Display", serif;
             font-weight:800;

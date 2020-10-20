@@ -21,6 +21,15 @@ export default function BestProjects() {
             padding:60px 15px;
         }
 
+        @media all and (min-width:700px){
+            padding:90px 15px;
+        }
+
+        @media all and (min-width:1000px){
+            width:1000px;
+            margin:0 auto;
+        }
+
         h1{
             font-family: "Playfair Display", serif;
             font-weight:800;
@@ -82,6 +91,33 @@ export default function BestProjects() {
                         object-fit:cover;
                         width:100%;
                         height:100%;
+                    }
+                }
+            }
+
+            @media all and (min-width:700px){
+                grid-template-columns:repeat(3,1fr);
+                grid-auto-rows:240px;
+                grid-gap:15px;
+
+                .imgCont{
+                    &:nth-child(2){
+                        grid-row:span 2;
+                    }
+    
+                    &:nth-child(3){
+                        grid-column: 3/4;
+                        grid-row:1/2;
+                    }
+    
+                    &:nth-child(6){
+                        grid-column: 3/4;
+                        grid-row:2/span 2;
+                    }
+    
+                    &:nth-child(7){
+                        grid-column: 1/2;
+                        grid-row:3/span 2;
                     }
                 }
             }

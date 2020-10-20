@@ -61,6 +61,12 @@ class LatestBlog extends Component {
             blogsCont: [],
             bullets: []
         }
+        // this.blogSlideRef = React.createRef()
+        // this.blogBulletRef = React.createRef()
+        this.slideRefs = []
+        this.bulletRefs = []
+        this.index = 0;
+        this.blogSlide = React.createRef();
     }
 
     divideBlogs = () => {
@@ -74,7 +80,34 @@ class LatestBlog extends Component {
             bullets.push(i);
         }
 
-        this.setState({blogsCont, bullets})
+        this.setState({blogsCont, bullets}, () => {
+            this.sliderFunction()
+        })
+    }
+
+    sliderFunction(){    
+        this.blogSlide.current.style.cssText = `height:${this.slideRefs[0].clientHeight + 70}px`;
+        
+        setInterval(() => {
+            if(this.index >= this.bulletRefs.length){
+                this.index = 0
+            }else{
+                this.slideRefs.forEach((slide) => slide.classList.remove("active"))
+                this.bulletRefs.forEach((bullet) => bullet.classList.remove("activeBullet"))
+                this.slideRefs[this.index].classList.add("active")
+                this.bulletRefs[this.index].classList.add("activeBullet")
+                this.blogSlide.current.style.cssText = `min-height:${this.slideRefs[this.index].clientHeight + 10}px`;
+                this.index++
+            }
+        }, 5000)
+    }
+
+    clickHandler(i){
+        this.slideRefs.forEach((slide) => slide.classList.remove("active"))
+        this.bulletRefs.forEach((bullet) => bullet.classList.remove("activeBullet"))
+        this.slideRefs[i].classList.add("active")
+        this.bulletRefs[i].classList.add("activeBullet")
+        this.index = i;
     }
 
     componentDidMount(){
@@ -94,6 +127,15 @@ class LatestBlog extends Component {
                     padding:60px 15px;
                 }
 
+                @media all and (min-width:700px){
+                    padding:90px 15px;
+                }
+
+                @media all and (min-width:1000px){
+                    width:1000px;
+                    margin:0 auto;
+                }
+
                 .blogHeading{
                     @media all and (min-width:510px){
                         padding-bottom:20px;
@@ -107,7 +149,7 @@ class LatestBlog extends Component {
                         color:#161616;
 
                         @media all and (min-width:510px){
-                            font-size:1.75rem;
+                            font-size:1.7rem;
                         }
                     }
 
@@ -126,16 +168,28 @@ class LatestBlog extends Component {
 
                 .blogSlide{
                     padding-bottom:10px;
+                    position:relative;
 
                     @media all and (min-width:510px){
                         padding-bottom:20px;
                     }
 
                     .slide{
-                        display:none;
+                        width:100%;
+                        position:absolute;
+                        top:0;
+                        left:0;
+                        opacity:0;
+                        transition:opacity 500ms ease-in-out;
+
+                        @media all and (min-width:700px){
+                            display:grid;
+                            grid-template-columns:repeat(3, 1fr);
+                            grid-gap:20px;
+                        }
 
                         &.active{
-                            display:block;
+                            opacity:1;
                         }
                     }
 
@@ -152,10 +206,28 @@ class LatestBlog extends Component {
                             grid-template-columns:200px 1fr;
                         }
 
+                        @media all and (min-width:700px){
+                            grid-template-columns:1fr;
+                            padding:10px;
+                            align-content:start;
+                        }
+
                         .postImgWrapper{
                             position:relative;
                             top:0;
                             left:0;
+
+                            @media all and (min-width:700px){
+                                height:180px;
+                            }
+
+                            img{
+                                @media all and (min-width:700px){
+                                    object-fit:cover;
+                                    width:100%;
+                                    height:100%;
+                                }
+                            }
 
                             span{
                                 display:inline-block;
@@ -172,6 +244,12 @@ class LatestBlog extends Component {
 
                                 @media all and (min-width:510px){
                                     font-size:.8rem;
+                                }
+
+                                @media all and (min-width:700px){
+                                    font-size:.9rem;
+                                    bottom:5px;
+                                    padding:8px 12px;
                                 }
                             }
                         }
@@ -205,6 +283,8 @@ class LatestBlog extends Component {
                                     line-height: 1.4;
                                     display:block;
                                 }
+
+                                @media all and (min-width:700px){text-align:justify;}
                             }
                         }
                     }
@@ -240,12 +320,11 @@ class LatestBlog extends Component {
                         <h1>Latest Blog</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eleifend tristique nisl at elementum. Maecenas vitae convallis ante, sit amet egestas ipsum.</p>
                     </div>
-                    <div className="blogSlide">
-                        {console.log(this.state.bullets)}
+                    <div className="blogSlide" ref={this.blogSlide}>
                         {
                             this.state.blogsCont.map((cont, i) => {
                                 return(
-                                    <div className={`slide slide${i} ${(i === 0) ? "active" : ""}`} key={i}>
+                                    <div className={`slide slide${i} ${(i === 0) ? "active" : ""}`} key={i} ref={slide => this.slideRefs.push(slide)}>
                                         {
                                             cont.map((blog, x) => {
                                                 const { image, category, title, date, description } = blog;
@@ -253,7 +332,7 @@ class LatestBlog extends Component {
                                                 return(
                                                     <div className="blogPost" key={x}>
                                                         <div className="postImgWrapper">
-                                                            <img src={require(`../../images/${image}`)} />
+                                                            <img src={require(`../../images/${image}`)} alt={category}/>
                                                             <span>{category}</span>
                                                         </div>
                                                         <div className="postDetails">
@@ -272,7 +351,7 @@ class LatestBlog extends Component {
                     </div>
                     <div className="blogSlideBullet">
                         {
-                            this.state.bullets.map((blog, i) => <span key={i} className={`${(i === 0) ? "activeBullet" : ""}`}></span>)
+                            this.state.bullets.map((blog, i) => <span key={i} className={`${(i === 0) ? "activeBullet" : ""}`} ref={bullet => this.bulletRefs.push(bullet)} onClick={() => this.clickHandler(i)}></span>)
                         }
                     </div>
                 </div>

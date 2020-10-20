@@ -23,6 +23,13 @@ export default function AgencyContainer() {
                 align-items:start;
                 padding:40px 30px;
             }
+
+            @media all and (min-width:1000px){
+                width:1000px;
+                margin:0 auto;
+                padding-left:60px;
+                padding-right:60px;
+            }
         }
     `;
 
